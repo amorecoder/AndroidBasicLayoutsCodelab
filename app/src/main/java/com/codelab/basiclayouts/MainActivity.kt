@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -78,8 +79,8 @@ fun AlignYourBodyElement(
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                            .size(size = 88.dp)
-                            .clip(CircleShape),
+                .size(size = 88.dp)
+                .clip(CircleShape),
         )
         Text(
             text = stringResource(id = text),
@@ -90,11 +91,37 @@ fun AlignYourBodyElement(
 }
 
 // Step: Favorite collection card - Material Surface
+/* You can adapt the Surface to your needs by setting its parameters and modifier. In this case,
+the surface should have rounded corners. You can use the shape parameter for this. Instead of
+setting the shape to a Shape as for the Image in the previous step, you'll use a value coming
+from our Material theme. */
 @Composable
 fun FavoriteCollectionCard(
+    @DrawableRes drawable: Int,
+    @StringRes text: Int,
     modifier: Modifier = Modifier
 ) {
-    // Implement composable here
+    Surface(
+        shape = MaterialTheme.shapes.small, // round corner size
+        modifier = modifier
+    ) {
+        Row (
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.width(width = 192.dp)
+        ) {
+            Image(
+                painter = painterResource(id = drawable),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.size(56.dp)
+            )
+            Text(
+                text = stringResource(id = text),
+                style = MaterialTheme.typography.h3,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
+        }
+    }
 }
 
 // Step: Align your body row - Arrangements
@@ -185,6 +212,8 @@ fun AlignYourBodyElementPreview() {
 fun FavoriteCollectionCardPreview() {
     MySootheTheme {
         FavoriteCollectionCard(
+            drawable = R.drawable.fc2_nature_meditations,
+            text = R.string.fc2_nature_meditations,
             modifier = Modifier.padding(8.dp)
         )
     }

@@ -250,9 +250,19 @@ private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
 }
 
 // Step: MySoothe App - Scaffold
+/* Scaffold gives you a top-level configurable composable for apps that implement
+Material design. It contains slots for various Material concepts, one of which is the
+bottom bar. In this bottom bar, you can place the bottom navigation composable that you
+created in the previous step. */
 @Composable
 fun MySootheApp() {
-    // Implement composable here
+    MySootheTheme {
+        Scaffold(
+            bottomBar = { SootheBottomNavigation() }
+        ) { padding ->
+            HomeScreen(Modifier.padding(padding))
+        }
+    }
 }
 
 private val alignYourBodyData = listOf(
